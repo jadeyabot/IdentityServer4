@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace ConsoleMTLSClient
@@ -24,13 +25,16 @@ namespace ConsoleMTLSClient
 
         static async Task<TokenResponse> RequestTokenAsync()
         {
+            var cert = new X509Certificate2("client-client.p12", "changeit");
             var handler = new HttpClientHandler();
-            var cert = X509.CurrentUser.My.Thumbprint.Find("bf6e2ca4f07994430b86bf9d48833a33f27a5c24").Single();
+            // var cert = X509.CurrentUser.My.Thumbprint.Find("bf6e2ca4f07994430b86bf9d48833a33f27a5c24").Single();
             handler.ClientCertificates.Add(cert);
 
+            
             var client = new HttpClient(handler);
+            
 
-            var disco = await client.GetDiscoveryDocumentAsync(Constants.Authority);
+            var disco = await client.GetDiscoveryDocumentAsync("https://identityserver.local");
             if (disco.IsError) throw new Exception(disco.Error);
 
             var response = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest

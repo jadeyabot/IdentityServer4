@@ -9,4 +9,9 @@
     <ProjectReference Include="..\Constants\Constants.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="client-client.p12" />
+    <AdditionalFiles Include="client-client.p12" />
+  </ItemGroup>
+
 </Project>
