@@ -2,7 +2,7 @@
 {
     public class Constants
     {
-        public const string Authority = "http://localhost:5000";
+        public const string Authority = "https://localhost:5001";
         //public const string Authority = "https://local.identityserver.io";
 
         public const string SampleApi = "http://localhost:3721/";

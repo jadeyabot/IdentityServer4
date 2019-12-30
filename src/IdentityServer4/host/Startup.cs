@@ -126,7 +126,7 @@ namespace Host
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 
-            app.Use(async (context, next) =>
+            /*app.Use(async (context, next) =>
             {
                 var ssl = context.Request.Headers["X-SSL-CERT"];
                 if (ssl.Any())
@@ -140,7 +140,7 @@ namespace Host
                 }
                 
                 await next();
-            });
+            });*/
             
             app.UseCookiePolicy();
             

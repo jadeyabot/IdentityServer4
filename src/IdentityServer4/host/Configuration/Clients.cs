@@ -34,14 +34,14 @@ namespace Host.Configuration
                 {
                     ClientId = "mtls",
                     ClientSecrets = {
-                        new Secret(@"CN=mtls.test, OU=ROO\ballen@roo, O=mkcert development certificate", "mtls.test")
+                        // new Secret(@"CN=mtls.test, OU=ROO\ballen@roo, O=mkcert development certificate", "mtls.test")
+                        // {
+                        //     Type = SecretTypes.X509CertificateName
+                        // },
+                        new Secret("AEE93A0BE8D2EC8DBAEF6F0E74FF0A0833191EA1", "mtls.test")
                         {
-                            Type = SecretTypes.X509CertificateName
+                            Type = SecretTypes.X509CertificateThumbprint
                         },
-                        //new Secret("bca0d040847f843c5ee0fa6eb494837470155868", "mtls.test")
-                        //{
-                        //    Type = SecretTypes.X509CertificateThumbprint
-                        //},
                     },
 
                     AccessTokenType = AccessTokenType.Jwt,

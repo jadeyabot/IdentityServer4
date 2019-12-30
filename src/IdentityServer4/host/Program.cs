@@ -9,6 +9,7 @@ using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
 using System;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Server.Kestrel.Https;
 
 namespace Host
 {
@@ -58,6 +59,13 @@ namespace Host
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    
+                    webBuilder.ConfigureKestrel(o =>
+                    {
+                        o.ConfigureHttpsDefaults(o => 
+                            o.ClientCertificateMode = 
+                                ClientCertificateMode.AllowCertificate);
+                    });
                 });
     }
 }
