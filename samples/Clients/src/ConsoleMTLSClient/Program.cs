@@ -34,7 +34,7 @@ namespace ConsoleMTLSClient
             var client = new HttpClient(handler);
             
 
-            var disco = await client.GetDiscoveryDocumentAsync("https://localhost:5001");
+            var disco = await client.GetDiscoveryDocumentAsync("https://identityserver.local");
             if (disco.IsError) throw new Exception(disco.Error);
 
             var response = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest

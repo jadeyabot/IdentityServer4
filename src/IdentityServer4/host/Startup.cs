@@ -16,6 +16,7 @@ using Serilog;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading.Tasks;
 using Host.Extensions;
 using Microsoft.AspNetCore.Authentication.Certificate;
@@ -117,6 +118,24 @@ namespace Host
                        }
                    };*/
                });
+
+            services.AddCertificateForwarding(options =>
+            {
+                options.CertificateHeader = "X-SSL-CERT";
+
+                options.HeaderConverter = (headerValue) =>
+                {
+                    X509Certificate2 clientCertificate = null;
+
+                    if(!string.IsNullOrWhiteSpace(headerValue))
+                    {
+                        byte[] bytes = Encoding.UTF8.GetBytes(Uri.UnescapeDataString(headerValue));
+                        clientCertificate = new X509Certificate2(bytes);
+                    }
+
+                    return clientCertificate;
+                };
+            });
         }
 
         public void Configure(IApplicationBuilder app)
@@ -143,6 +162,7 @@ namespace Host
             });*/
             
             app.UseCookiePolicy();
+            app.UseCertificateForwarding();
             
             app.UseSerilogRequestLogging();
 
