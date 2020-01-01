@@ -58,6 +58,9 @@ namespace Host
 
             var builder = services.AddIdentityServer(options =>
                 {
+                    // todo: make this MTLS aware instead
+                    //options.IssuerUri = "https://identityserver.local";
+                    
                     options.Events.RaiseSuccessEvents = true;
                     options.Events.RaiseFailureEvents = true;
                     options.Events.RaiseErrorEvents = true;
@@ -65,6 +68,7 @@ namespace Host
 
                     options.MutualTls.Enabled = true;
                     options.MutualTls.ClientCertificateAuthenticationScheme = "x509";
+                    options.MutualTls.SubDomainName = "mtls";
                 })
                 .AddInMemoryClients(Clients.Get())
                 //.AddInMemoryClients(_config.GetSection("Clients"))

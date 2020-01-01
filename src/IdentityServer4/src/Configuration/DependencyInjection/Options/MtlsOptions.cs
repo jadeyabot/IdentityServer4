@@ -18,5 +18,10 @@ namespace IdentityServer4.Configuration
         /// Specifies the name of the authentication handler for X.509 client certificates
         /// </summary>
         public string ClientCertificateAuthenticationScheme { get; set; } = "Certificate";
+        
+        /// <summary>
+        /// If a sub-domain is used for requiring client certifiates, this specifies the name of it
+        /// </summary>
+        public string SubDomainName { get; set; }
     }
 }

@@ -47,7 +47,17 @@ namespace IdentityServer4.Extensions
 
         public static string GetIdentityServerOrigin(this HttpContext context)
         {
+            var options = context.RequestServices.GetRequiredService<IdentityServerOptions>();
             var request = context.Request;
+            
+            if (options.MutualTls.Enabled && options.MutualTls.SubDomainName.IsPresent())
+            {
+                if (request.Host.Value.StartsWith(options.MutualTls.SubDomainName, StringComparison.OrdinalIgnoreCase))
+                {
+                    return request.Scheme + "://" + request.Host.Value.Substring(options.MutualTls.SubDomainName.Length + 1);
+                }
+            }
+            
             return request.Scheme + "://" + request.Host.Value;
         }
 
@@ -134,7 +144,7 @@ namespace IdentityServer4.Extensions
                     uri = uri.ToLowerInvariant();
                 }
             }
-
+            
             return uri;
         }
 

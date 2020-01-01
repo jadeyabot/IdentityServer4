@@ -33,16 +33,13 @@ namespace ConsoleMTLSClient
             
             var client = new HttpClient(handler);
             
-
-            var disco = await client.GetDiscoveryDocumentAsync("https://identityserver.local");
-            if (disco.IsError) throw new Exception(disco.Error);
+            // todo: make discovery aware of sub-domain
+            //var disco = await client.GetDiscoveryDocumentAsync("https://identityserver.local");
+            //if (disco.IsError) throw new Exception(disco.Error);
 
             var response = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
-                Address = disco
-                            .TryGetValue(OidcConstants.Discovery.MtlsEndpointAliases)
-                            .Value<string>(OidcConstants.Discovery.TokenEndpoint)
-                            .ToString(),
+                Address = "https://mtls.identityserver.local/connect/mtls/token",
 
                 ClientId = "mtls",
                 //ClientSecret = "secret",

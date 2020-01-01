@@ -48,6 +48,7 @@ namespace IdentityServer4.Hosting
                 {
                     // todo: decide how to get cert from auth response above. for now, just get from the connection
                     context.Items[IdentityServerConstants.MutualTls.X509CertificateItemKey] = context.Connection.ClientCertificate;
+                    
 
                     var path = Constants.ProtocolRoutePaths.ConnectPathPrefix + subPath.ToString().EnsureLeadingSlash();
                     path = path.EnsureLeadingSlash();
