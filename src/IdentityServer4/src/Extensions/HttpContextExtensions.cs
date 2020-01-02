@@ -51,11 +51,11 @@ namespace IdentityServer4.Extensions
             var request = context.Request;
             
             // todo: review
-            if (options.MutualTls.Enabled && options.MutualTls.SubDomainName.IsPresent())
+            if (options.MutualTls.Enabled && options.MutualTls.DomainName.IsPresent())
             {
-                if (request.Host.Value.StartsWith(options.MutualTls.SubDomainName, StringComparison.OrdinalIgnoreCase))
+                if (request.Host.Value.StartsWith(options.MutualTls.DomainName, StringComparison.OrdinalIgnoreCase))
                 {
-                    return request.Scheme + "://" + request.Host.Value.Substring(options.MutualTls.SubDomainName.Length + 1);
+                    return request.Scheme + "://" + request.Host.Value.Substring(options.MutualTls.DomainName.Length + 1);
                 }
             }
             

@@ -22,6 +22,6 @@ namespace IdentityServer4.Configuration
         /// <summary>
         /// If a sub-domain is used for requiring client certifiates, this specifies the name of it
         /// </summary>
-        public string SubDomainName { get; set; }
+        public string DomainName { get; set; }
     }
 }

@@ -68,7 +68,7 @@ namespace Host
 
                     options.MutualTls.Enabled = true;
                     options.MutualTls.ClientCertificateAuthenticationScheme = "x509";
-                    options.MutualTls.SubDomainName = "mtls";
+                    options.MutualTls.DomainName = "mtls";
                 })
                 .AddInMemoryClients(Clients.Get())
                 //.AddInMemoryClients(_config.GetSection("Clients"))

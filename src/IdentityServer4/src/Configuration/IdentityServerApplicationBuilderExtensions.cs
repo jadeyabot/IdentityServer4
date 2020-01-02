@@ -144,6 +144,7 @@ namespace Microsoft.AspNetCore.Builder
             if (options.Authentication.CheckSessionCookieName.IsMissing()) throw new InvalidOperationException("CheckSessionCookieName is not configured");
 
             if (options.Cors.CorsPolicyName.IsMissing()) throw new InvalidOperationException("CorsPolicyName is not configured");
+            if (options.MutualTls.DomainName.Contains(".")) throw new InvalidOperationException("Mtls domain name must not contain a dot.");
         }
 
         internal static object TestService(IServiceProvider serviceProvider, Type service, ILogger logger, string message = null, bool doThrow = true)
