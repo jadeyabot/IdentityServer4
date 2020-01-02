@@ -155,6 +155,7 @@ namespace IdentityServer4.ResponseHandling
                 {
                     var mtlsEndpoints = new Dictionary<string, string>();
 
+                    // todo: https://mtls.is.com/connect/token vs https://is.com/connect/mtls/token ??
                     if (Options.Endpoints.EnableTokenEndpoint)
                     {
                         mtlsEndpoints.Add(OidcConstants.Discovery.TokenEndpoint, baseUrl + Constants.ProtocolRoutePaths.MtlsToken);

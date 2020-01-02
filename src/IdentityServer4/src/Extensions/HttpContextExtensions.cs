@@ -50,6 +50,7 @@ namespace IdentityServer4.Extensions
             var options = context.RequestServices.GetRequiredService<IdentityServerOptions>();
             var request = context.Request;
             
+            // todo: review
             if (options.MutualTls.Enabled && options.MutualTls.SubDomainName.IsPresent())
             {
                 if (request.Host.Value.StartsWith(options.MutualTls.SubDomainName, StringComparison.OrdinalIgnoreCase))
